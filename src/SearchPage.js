@@ -7,12 +7,14 @@ class SearchPage extends Component {
     query: '',
     books: []
   }
+
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
     if (query) {
-      BooksAPI.search(query, 20).then((books) =>
+      BooksAPI.search(query, 20).then((books) => {
+        console.log(books)
         this.setState({ books: books })
-      )
+      })
     } else {
       this.setState({ books: [] })
     }
@@ -42,7 +44,7 @@ class SearchPage extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
           {this.state.books.map((book) =>
-            <li key={book.title}>
+            <li key={book.id}>
               <Book book={book} />
             </li>
           )}

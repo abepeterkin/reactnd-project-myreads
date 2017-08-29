@@ -1,9 +1,21 @@
 import React, {Component} from 'react'
 import Bookshelf from './Bookshelf'
+import * as BooksAPI from './BooksAPI'
 
 class MainPage extends Component {
+  state = {
+    books: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books })
+      console.log(books)
+    })
+  }
+
   render () {
-    const { books} = this.props
+    const {books} = this.state
     let currentlyReading = books.filter((book) => book.shelf === 'currentlyReading')
     let wantToRead = books.filter((book) => book.shelf === 'wantToRead')
     let read = books.filter((book) => book.shelf === 'read')

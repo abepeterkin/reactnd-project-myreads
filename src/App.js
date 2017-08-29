@@ -1,23 +1,12 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
 import './App.css'
 import MainPage from './MainPage'
 import SearchPage from './SearchPage'
 
 class BooksApp extends React.Component {
-  state = {
-    books: []
-  }
 
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-      console.log(books)
-    })
-  }
-
-  updateBook(updatedBook, shelf) {
+  /*updateBook(updatedBook, shelf) {
     BooksAPI.update(updatedBook, shelf).then((response) => {
       console.log(response);
       this.setState((state) => {
@@ -32,23 +21,16 @@ class BooksApp extends React.Component {
         })
       })
     })
-  }
+  }*/
 
   render() {
     return (
       <div className="app">
         <Route exact path="/" render={() => (
-          <MainPage
-            updateBook={this.state.updateBook}
-            books={this.state.books}
-          />
+          <MainPage />
         )}/>
         <Route path="/search" render={({history}) => (
-          <SearchPage
-            updateBook={(updatedBook, shelf) => {
-              this.updateBook(updatedBook, shelf)
-            }}
-          />
+          <SearchPage />
         )}/>
       </div>
     )

@@ -1,16 +1,21 @@
 import React, {Component} from 'react'
+import * as BooksAPI from './BooksAPI'
 
 class Book extends Component {
   handleChange = (event) => {
-    this.props.updateBook(this.props.book, event.target.value)
+    BooksAPI.update(this.props.book, event.target.value).then((response => {
+      //TODO: update the state somehow
+    }));
   }
   render () {
     const {book} = this.props
+    let thumbnail = ''
+    if (book.imageLinks) thumbnail = book.imageLinks.thumbnail
     return (
       <div className="book">
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193,
-            backgroundImage: 'url(' + book.imageLinks.thumbnail + ')' }}>
+            backgroundImage: 'url(' + thumbnail + ')' }}>
           </div>
           <div className="book-shelf-changer">
             <select onChange={this.handleChange}>
