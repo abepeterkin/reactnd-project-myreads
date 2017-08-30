@@ -6,23 +6,6 @@ import SearchPage from './SearchPage'
 
 class BooksApp extends React.Component {
 
-  /*updateBook(updatedBook, shelf) {
-    BooksAPI.update(updatedBook, shelf).then((response) => {
-      console.log(response);
-      this.setState((state) => {
-        state.books.map((book) => {
-          if (book.title === updatedBook.title) {
-            let newBook = Object.assign({}, book)
-            newBook.shelf = shelf
-            return newBook
-          } else {
-            return book
-          }
-        })
-      })
-    })
-  }*/
-
   render() {
     return (
       <div className="app">
