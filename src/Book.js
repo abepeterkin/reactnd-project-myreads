@@ -5,6 +5,7 @@ class Book extends Component {
   handleChange = (event) => {
     this.props.updateBook(this.props.book, event.target.value)
   }
+
   render () {
     const {book} = this.props
     let thumbnail = ''

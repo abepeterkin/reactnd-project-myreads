@@ -3,6 +3,7 @@ import Book from './Book'
 import * as BooksAPI from './BooksAPI'
 
 class SearchPage extends Component {
+
   state = {
     query: '',
     books: []

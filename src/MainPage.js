@@ -21,7 +21,6 @@ class MainPage extends Component {
 
   updateBook = (updatedBook, shelf) => {
     BooksAPI.update(updatedBook, shelf).then((response) => {
-      console.log(response);
       this.getAll()
     })
   }
