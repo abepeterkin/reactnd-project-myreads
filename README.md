@@ -5,5 +5,5 @@ Created for [Udacity's](https://www.udacity.com) React Nanodegree Program.
 In the top level of the project, run 'npm install'
 
 ### How to run
-'npm start' to run a local instance on localhost:3000
-'npm run build' to create a bundle for deployment:
+'npm start' to run a local instance on localhost:3000.
+'npm run build' to create a bundle for deployment.
