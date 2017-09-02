@@ -11,7 +11,6 @@ class MainPage extends Component {
   getAll = () => {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
-      console.log(books)
     })
   }
 

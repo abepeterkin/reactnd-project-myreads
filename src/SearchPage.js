@@ -6,12 +6,25 @@ class SearchPage extends Component {
 
   state = {
     query: '',
-    books: []
+    shelfbooks: {},
+    results: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      const shelfbooks = {}
+      books.forEach((book) => {
+        if (book.id && book.shelf) shelfbooks[book.id] = book.shelf
+      })
+      this.setState({shelfbooks: shelfbooks})
+    })
   }
 
   updateBook = (updatedBook, shelf) => {
     BooksAPI.update(updatedBook, shelf).then((response) => {
-      this.updateQuery(this.state.query)
+      const shelfbooks = this.state.shelfbooks
+      if (updatedBook.id) shelfbooks[updatedBook.id] = shelf
+      this.setState({shelfbooks: shelfbooks})
     })
   }
 
@@ -19,14 +32,21 @@ class SearchPage extends Component {
     if (query) {
       this.setState({ query: query.trim() })
       BooksAPI.search(query, 20).then((response) => {
-        console.log(response)
-        if (!response.error) this.setState({ books: response })
+        if (!response.error) {
+          this.setState({ results: response })
+        }
       })
     } else {
-      this.setState({ books: [] })
+      this.setState({ results: [] })
     }
   }
+
   render () {
+    const results = this.state.results
+    results.forEach((book) => {
+      const shelf = this.state.shelfbooks[book.id]
+      if (shelf) book.shelf = shelf
+    })
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -50,7 +70,7 @@ class SearchPage extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-          {this.state.books.map((book) =>
+          {results.map((book) =>
             <li key={book.id}>
               <Book book={book} updateBook={this.updateBook}/>
             </li>
