@@ -37,7 +37,7 @@ class SearchPage extends Component {
         }
       })
     } else {
-      this.setState({ results: [] })
+      this.setState({ query: '', results: [] })
     }
   }
 
