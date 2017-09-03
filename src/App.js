@@ -24,9 +24,10 @@ class BooksApp extends React.Component {
   updateBook = (updatedBook, shelf) => {
     BooksAPI.update(updatedBook, shelf).then((response) => {
       const bookMap = this.state.bookMap
+      if (!bookMap[updatedBook.id]) bookMap[updatedBook.id] = updatedBook
       for (var id in bookMap) {
         if (!bookMap.hasOwnProperty(id)) continue
-        const book = bookMap[id];
+        const book = bookMap[id]
         if (book.id && book.id === updatedBook.id) book.shelf = shelf
       }
       this.setState({bookMap: bookMap})
