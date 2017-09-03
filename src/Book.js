@@ -7,6 +7,11 @@ class Book extends Component {
   }
 
   render () {
+    /* on the search page, the selected value of the shelf dropdown menu doesn't
+    change when the book is updated unless this useless print statement is here.
+    remove it and see what happens. I have no idea what the hell is going on */
+    console.log('')
+
     const {book} = this.props
     let thumbnail = ''
     if (book.imageLinks) thumbnail = book.imageLinks.thumbnail

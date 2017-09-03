@@ -1,35 +1,16 @@
 import React, {Component} from 'react'
 import Bookshelf from './Bookshelf'
-import * as BooksAPI from './BooksAPI'
 
 class MainPage extends Component {
 
-  state = {
-    books: []
-  }
-
-  getAll = () => {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-    })
-  }
-
-  componentDidMount() {
-    this.getAll()
-  }
-
-  updateBook = (updatedBook, shelf) => {
-    BooksAPI.update(updatedBook, shelf).then((response) => {
-      this.getAll()
-    })
-  }
-
   render () {
-    const {books} = this.state
+    const {bookMap} = this.props
     const currentlyReading = []
     const wantToRead = []
     const read = []
-    books.forEach(book => {
+    for (var id in bookMap) {
+      if (!bookMap.hasOwnProperty(id)) continue
+      const book = bookMap[id];
       switch (book.shelf) {
         case 'currentlyReading':
           currentlyReading.push(book)
@@ -43,7 +24,7 @@ class MainPage extends Component {
         default:
           break
       }
-    })
+    }
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -53,15 +34,15 @@ class MainPage extends Component {
           <div>
           <Bookshelf title='Currently Reading'
             books={currentlyReading}
-            updateBook={this.updateBook}
+            updateBook={this.props.updateBook}
           />
           <Bookshelf title='Want to Read'
             books={wantToRead}
-            updateBook={this.updateBook}
+            updateBook={this.props.updateBook}
           />
           <Bookshelf title='Read'
             books={read}
-            updateBook={this.updateBook}
+            updateBook={this.props.updateBook}
           />
           </div>
         </div>
