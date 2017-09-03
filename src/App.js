@@ -22,7 +22,6 @@ class BooksApp extends React.Component {
   }
 
   updateBook = (updatedBook, shelf) => {
-    console.log('updateBook')
     BooksAPI.update(updatedBook, shelf).then((response) => {
       const bookMap = this.state.bookMap
       for (var id in bookMap) {
